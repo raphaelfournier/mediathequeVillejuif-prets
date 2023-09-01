@@ -3,6 +3,13 @@
 Récupérer la liste des emprunts sur des comptes à la Médiathèque de Villejuif,
 avec Selenium et Python.
 
+## Installation
+
+    python -m venv venv
+    source venv/bin/activate
+    pip install --upgrade pip
+    pip install selenium pandas
+
 ## Configuration
 
 Un fichier de configuration, appelé `config.ini` doit être rempli, avec les

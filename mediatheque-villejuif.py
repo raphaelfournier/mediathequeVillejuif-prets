@@ -9,7 +9,7 @@ from configparser import ConfigParser
 import pandas as pd
 
 def lectureConfig(configfile):
-    parser = ConfigParser() 
+    parser = ConfigParser()
     parser.read(configfile)
     utilisateurs = {}
 
@@ -115,7 +115,7 @@ def pretsUtilisateur(utilisateur):
         mesprets = driver.find_element(By.CLASS_NAME, 'ui-loans-active')
         mesprets.click()
     except NoSuchElementException:
-        print("active loans non trouvé")
+        print("  ERROR: active loans non trouvé")
         exit(1)
 
     time.sleep(2)
@@ -169,9 +169,11 @@ def pretsUtilisateur(utilisateur):
         for c,b in v.items():
             d[c] = b
         l.append(d)
-    df = pd.DataFrame.from_records(l)
 
+    # TODO: documenter ici, améliorer le traitement
+    df = pd.DataFrame.from_records(l)
     print(df.to_markdown())
+    print() # blank line between users
 
     return dicoprets
 
@@ -186,7 +188,8 @@ if __name__ == '__main__':
         except:
             if error_counter < 3:
                 error_counter += 1
-                print("it failed "+str(error_counter)+" time(s). Restarting...")
+                print("  ERROR: it failed "+str(error_counter)+" time(s). Restarting...")
                 pretsUtilisateur(infouser)
             else:
                 raise Exception("3 errors. Stopping")
+    print("terminé!")
